@@ -3,6 +3,11 @@ pipeline {
     options {
         buildDiscarder logRotator(numToKeepStr: '10')
     }
+    parameters{
+        choice(name: 'Scan Only', 
+            choices: ['One', 'Two', 'Three'], 
+            description: 'Select if you want to do only scan ')
+    }
 
     stages {
         stage('Build'){
