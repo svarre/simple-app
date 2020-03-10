@@ -4,6 +4,7 @@ pipeline {
         buildDiscarder logRotator(numToKeepStr: '10')
     }
     parameters{
+        booleanParam(name: skipScans , defaultValue: true , description: )
         choice(name: 'ScanOnly', 
             choices: ['One', 'Two', 'Three'], 
             description: 'Select if you want to do only scan ')
