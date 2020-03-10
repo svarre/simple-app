@@ -17,6 +17,7 @@ pipeline {
                 }
                 sh script: 'mvn clean install'
                 archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
+                echo "Printing parameters name ${params.Scan Only}"
             }
         }
     }
