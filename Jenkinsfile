@@ -5,6 +5,7 @@ pipeline {
     }
     parameters{
         booleanParam(name: 'skipScans' , defaultValue: false , description: 'Enabling this will skip!' )
+        string(name: 'textbox')
         choice(name: 'ScanOnly', 
             choices: 'no\nyes', 
             description: 'Select if you want to do only scan ')
