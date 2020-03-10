@@ -12,6 +12,9 @@ pipeline {
     stages {
         stage('Build'){
             steps{
+                script {
+                    currentBuild.displayName = "Test-Build - " + currentBuild.number
+                }
                 sh script: 'mvn clean install'
                 archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
             }
