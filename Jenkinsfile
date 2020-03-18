@@ -31,10 +31,11 @@ pipeline{
     stages{
         stage('BuildNumber'){
             steps{
-                //checkout scm
+                //
                script{
+                    checkout scm
                     def pom = readMavenPom file:'pom.xml'
-                    def PIPELINE_VERSION = params.APP_NAME + "-" + BUILD_NUMBER + "-" + pom.PIPELINE_VERSION
+                    def PIPELINE_VERSION = params.APP_NAME + "-" + BUILD_NUMBER + "-" + pom.version
                     currentBuild.displayName = PIPELINE_VERSION
                }
                 echo "Build number created succesfull"
