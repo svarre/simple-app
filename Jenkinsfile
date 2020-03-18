@@ -35,7 +35,8 @@ pipeline{
                script{
                     checkout scm
                     def pom = readMavenPom file:'pom.xml'
-                    def PIPELINE_VERSION = currentBuild.projectName + "-" + BUILD_NUMBER + "-" + pom.version
+                   // def PIPELINE_VERSION = currentBuild.projectName + "-" + BUILD_NUMBER + "-" + pom.version
+                    def PIPELINE_VERSION = currentBuild.projectName + "-" + currentBuild.number + "-" + pom.version
                     currentBuild.displayName = PIPELINE_VERSION
                }
                 echo "Build number created succesfull"
