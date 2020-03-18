@@ -33,9 +33,11 @@ def call(Map params) {
         stage('BuildNumber'){
             steps{
                 //checkout scm
-                def pom = readMavenPom file:'pom.xml'
-                def PIPELINE_VERSION = params.APP_NAME + "-" + BUILD_NUMBER + "-" + pom.PIPELINE_VERSION
-                currentBuild.displayName = PIPELINE_VERSION
+               script{
+                    def pom = readMavenPom file:'pom.xml'
+                    def PIPELINE_VERSION = params.APP_NAME + "-" + BUILD_NUMBER + "-" + pom.PIPELINE_VERSION
+                    currentBuild.displayName = PIPELINE_VERSION
+               }
                 echo "Build number created succesfull"
             }
 
