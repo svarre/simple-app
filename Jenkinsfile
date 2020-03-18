@@ -26,8 +26,8 @@ pipeline {
     }
 }
 */
-#!/bin/groovy
-pipeline{
+def call(Map params) {
+    pipeline{
     agent any
     stages{
         stage('BuildNumber'){
@@ -41,4 +41,6 @@ pipeline{
 
         }
     }
+}
+
 }
