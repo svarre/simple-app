@@ -26,8 +26,7 @@ pipeline {
     }
 }
 */
-def call(Map params) {
-    pipeline{
+pipeline{
     agent any
     stages{
         stage('BuildNumber'){
@@ -43,6 +42,4 @@ def call(Map params) {
 
         }
     }
-}
-
 }
