@@ -26,8 +26,7 @@ pipeline {
     }
 }
 */
-def call(Map params) {
-    pipeline{
+pipeline{
     agent any
     stages{
         stage('BuildNumber'){
@@ -36,7 +35,7 @@ def call(Map params) {
                script{
                     checkout scm
                     def pom = readMavenPom file:'pom.xml'
-                    def PIPELINE_VERSION = params.APP_NAME + "-" + BUILD_NUMBER + "-" + pom.version
+                    def PIPELINE_VERSION = currentBuild.projectName + "-" + BUILD_NUMBER + "-" + pom.version
                     currentBuild.displayName = PIPELINE_VERSION
                }
                 echo "Build number created succesfull"
@@ -44,5 +43,4 @@ def call(Map params) {
 
         }
     }
-}
 }
