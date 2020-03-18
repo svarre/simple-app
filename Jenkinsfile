@@ -1,3 +1,4 @@
+/*
 pipeline {
     agent any
     options {
@@ -21,6 +22,22 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
                 echo "Printing parameters name ${params.ScanOnly}"
             }
+        }
+    }
+}
+*/
+pipeline{
+    agent any
+    stages{
+        stage('BuildNumber'){
+            steps{
+                //checkout scm
+                def pom = readMavenPom file:'pom.xml'
+                def PIPELINE_VERSION = params.APP_NAME + "-" + BUILD_NUMBER + "-" + pom.PIPELINE_VERSION
+                currentBuild.displayName = PIPELINE_VERSION
+                echo "Build number created succesfull"
+            }
+
         }
     }
 }
