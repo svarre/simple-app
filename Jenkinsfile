@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        maven 'maven3.6.3'
+    }
     stages {
          stage('Build'){
             steps{
@@ -8,7 +11,9 @@ pipeline {
                     def version = "App" + "-" + pom.version
                     currentBuild.displayName = "App" + "-" + version 
                 }
-                echo 'Building the stage'
+                sh 'mvn clean install'
+                sh 'ls'
+                //echo 'Building the stage'
             }
         }
         stage('Stages Running in Parallel / Scans') {
