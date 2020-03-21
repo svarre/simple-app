@@ -8,7 +8,7 @@ pipeline {
             steps{
                 script{
                     def pom = readMavenPom file:'pom.xml'
-                    def version = "App" + "-" + pom.version + currentBuild.number
+                    def version = "App" + "-" + pom.version + "-" + currentBuild.number
                     currentBuild.displayName = version
                 }
                 sh 'mvn clean install'
