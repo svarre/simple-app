@@ -6,7 +6,7 @@ pipeline {
                 script{
                     def pom = readMavenPom file:'pom.xml'
                     def version = "App" + "-" + pom.version
-                    currentBuild.displayname = "App" + "-" + version 
+                    currentBuild.displayName = "App" + "-" + version 
                 }
                 echo 'Building the stage'
             }
