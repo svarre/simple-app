@@ -1,47 +1,59 @@
-/*
 pipeline {
     agent any
-    options {
-        buildDiscarder logRotator(numToKeepStr: '10')
-    }
-    parameters{
-        booleanParam(name: 'skipScans' , defaultValue: false , description: 'Enabling this will skip!' )
-        string(name: 'textbox')
-        choice(name: 'ScanOnly', 
-            choices: 'no\nyes', 
-            description: 'Select if you want to do only scan ')
-    }
-
     stages {
-        stage('Build'){
+         stage('Build'){
             steps{
-                script {
-                    currentBuild.displayName = "Test-Build - " + currentBuild.number
-                }
-                sh script: 'mvn clean install'
-                archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
-                echo "Printing parameters name ${params.ScanOnly}"
-            }
-        }
-    }
-}
-*/
-pipeline{
-    agent any
-    stages{
-        stage('BuildNumber'){
-            steps{
-                //
-               script{
-                    checkout scm
+                script{
                     def pom = readMavenPom file:'pom.xml'
-                   def PIPELINE_VERSION = JOB_NAME + "-" + BUILD_NUMBER + "-" + pom.version
-                    //def PIPELINE_VERSION = currentBuild.projectName + "-" + currentBuild.number + "-" + pom.version
-                    currentBuild.displayName = PIPELINE_VERSION
-               }
-                echo "Build number created succesfull"
+                    def version = "App" + "-" + pom.version
+                    currentBuild.displayname = "App" + "-" + version 
+                }
+                echo 'Building the stage'
             }
-
         }
+        stage('Stages Running in Parallel / Scans') {
+            failFast true
+            parallel {
+                stage('Sonar Scan') {
+                    steps {
+                        echo "Stage1 executing"
+                        sleep 10
+                    }
+                }
+                stage('Fortify Scan') {
+                    steps {
+                        echo "Stage2 executing"
+                        sleep 10
+                    }
+                }
+                /*stage('Stage3') {
+                    steps {
+                        echo "Stage3 executing"
+                        sleep 10
+                    }                    
+                }*/
+            }
+        }
+        stage('Build and push Docker image'){
+            steps{
+                echo 'Building and pushing docker image to artifactory'
+            }
+        }
+        stage('Deploy to Dev environment '){
+            steps{
+                echo 'Deploying to dev environment'
+            }
+        }
+        stage('Test'){
+            steps{
+                timeout(time: 10, unit: 'SECONDS') {
+                    input message:"Promoto to test" , ok:"OK"
+                    
+                }
+                
+            echo 'Promote to test'
+            }
+        }
+        
     }
 }
