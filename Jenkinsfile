@@ -84,6 +84,12 @@ pipeline {
             echo 'Promote to test'
             }
         }
+        stage('Email Notificaiton'){
+            steps{
+                mail bcc: '', body: '''Hi, This is a test mail ''',  
+                subject: 'Build Status for Parallel Project ', to: 'sivva26@gmail.com'
+            }
+        }
         
     }
 }
