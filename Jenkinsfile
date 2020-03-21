@@ -16,6 +16,25 @@ pipeline {
                 //echo 'Building the stage'
             }
         }
+        stage('Upload war to nexus'){
+            steps{
+                nexusArtifactUploader artifacts: [
+                    [
+                        artifactId: 'simple-app', 
+                        classifier: '', 
+                        file: 'target/simple-app-1.0.0.war', 
+                        type: 'war'
+                    ]
+                ],
+                credentialsId: 'nexus_credentials', 
+                groupId: 'in.javahome',
+                nexusUrl: '172.31.40.137:8081', 
+                nexusVersion: 'nexus3', 
+                protocol: 'http', 
+                repository: 'http://52.205.222.94:8081/repository/simpleapp-release/', 
+                version: '1.0.0'
+            }
+        }
         stage('Stages Running in Parallel / Scans') {
             failFast true
             parallel {
