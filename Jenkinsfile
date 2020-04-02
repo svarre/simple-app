@@ -19,6 +19,7 @@ pipeline{
             steps{
                 dir('target/') {
                      unstash 'build_artifact'
+                     sh 'ls'
                 }
 
                 
