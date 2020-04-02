@@ -6,6 +6,8 @@ pipeline{
                 sh script: 'mvn clean package'
                 sh 'ls'
                 sh 'ls target/'
+                sh 'mv target/*.war target/old.war'
+                sh 'ls target/'
             }
             post {
                 success {
