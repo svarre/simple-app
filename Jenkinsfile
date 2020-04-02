@@ -15,5 +15,11 @@ pipeline{
                 }
             }
         }
+        stage ('Copy Stashed files'){
+            steps{
+                unstash 'build_artifact'
+                sh 'ls'
+            }
+        }
     }
 }
