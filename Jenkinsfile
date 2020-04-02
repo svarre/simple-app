@@ -17,8 +17,12 @@ pipeline{
         }
         stage ('Copy Stashed files'){
             steps{
-                unstash 'build_artifact'
-                sh 'mv *.war target/new.war'
+                dir('target/') {
+                     unstash 'build_artifact'
+                }
+
+                
+                //sh 'mv *.war target/new.war'
             }
         }
     }
