@@ -5,6 +5,7 @@ pipeline{
             steps{
                 sh script: 'mvn clean package'
                 sh 'ls'
+                sh 'ls target/'
             }
             post {
                 success {
