@@ -5,9 +5,9 @@ pipeline {
       steps{
         script {
           def pom = readMavenPom file:'pom.xml'
-          def pomversion = pom.version
+          //def pomversion = pom.version
         }
-        echo pomversion
+        echo pom.version
         sh 'mvn clean install package'
         archiveArtifacts '**/*.war'
       }
