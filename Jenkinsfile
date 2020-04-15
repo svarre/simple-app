@@ -4,7 +4,7 @@ pipeline{
     stage ('artifact_create') {
       steps {
         sh 'mvn clean install'
-        archive '**/*.war', fingerprint: true
+        archive '**/*.war'
       }
     }
   }
