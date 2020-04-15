@@ -1,17 +1,11 @@
-#!/usr/bin/env groovy
 pipeline{
-  agent any
-  environment {
-    POM_VERSION = readMavenPom file: 'pom.xml'
-    version = POM_VERSION.version
-  }
+  agent any 
   stages {
-      stage ('Build'){
-        steps {
-          script {
-            echo "${version}"
-          }
-        }
+    stage ('artifact_create') {
+      steps {
+        sh 'mvn clean install'
+        archive '**/*.war', fingerprint: true
       }
+    }
   }
 }
