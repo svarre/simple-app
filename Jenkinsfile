@@ -2,7 +2,7 @@
 pipeline{
   agent any
   environment {
-    POM_VERSION = readMavenPom file: 'pom.xml'  
+    POM_VERSION = readMavenPom file: 'pom.xml'.version 
   }
   stages {
       stage ('Build'){
