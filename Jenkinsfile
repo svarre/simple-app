@@ -2,13 +2,14 @@
 pipeline{
   agent any
   environment {
-    POM_VERSION = readMavenPom file: 'pom.xml'.getVersion() 
+    POM_VERSION = readMavenPom file: 'pom.xml'
+    version = POM_VERSION.version
   }
   stages {
       stage ('Build'){
         steps {
           script {
-            echo "${POM_VERSION}"
+            echo "${version}"
           }
         }
       }
