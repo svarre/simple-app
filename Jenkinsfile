@@ -16,9 +16,11 @@ pipeline {
                 }
                 sh 'mvn clean install'
                 sh 'ls'
+                archiveArtifacts '**/*.war'
                 //echo 'Building the stage'
             }
         }
+        /*
         stage('Upload war to nexus'){
             steps{
                 script{
@@ -42,7 +44,7 @@ pipeline {
                 }
                 
             }
-        }
+        } */
         stage('Stages Running in Parallel / Scans') {
             failFast true
             parallel {
