@@ -22,7 +22,7 @@ pipeline{
       steps {
           script {
                 string a = "${GIT_CURRENT_COMMIT}"
-                echo "Substring of present commit is : ${a}.substring(0,6)"
+                println("Substring of present commit is : ${a}.substring(0,6)")
                 sh 'mvn clean install'
                 archive '**/*.war'
                 echo "current commit id is : ${GIT_COMMIT}"
@@ -51,22 +51,26 @@ pipeline{
         }
         steps {
                 //sh 'cd artifacts'
-                 dir("${env.WORKSPACE}/artifacts"){
+                dir("${env.WORKSPACE}/artifacts"){
                    sh "pwd"
-                   sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output one.zip'
-                  sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output two.zip'
-                  sh 'ls -ltr'  
-                  sh 'date' 
-                  sh 'touch siva.txt'
-                   sh 'pwd'
+                    sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output one.zip'
+                    sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output two.zip'
+                    sh 'ls'  
+                    sh 'date'
                 }
+
+                sh 'mkdir ./ui'
+                sh 'mkdir ./apps'
+
+                
+                      
         }
-       /* post {
+        post {
             always {
                 // One or more steps need to be included within each condition's block.
                 cleanWs()
             }
-      } */
+}
 
     }
   }
