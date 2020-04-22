@@ -45,8 +45,11 @@ pipeline{
             expression { params.deploy == 'yes'}
         }
         steps {
-            sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output babynames.zip'
-            sh 'ls'
+            dir (artifacts) {
+                sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output babynames.zip'
+                sh 'ls'
+            }
+            
             
         }
     }
