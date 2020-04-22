@@ -57,6 +57,7 @@ pipeline{
                     sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output two.zip'
                     sh 'ls'  
                     sh 'date'
+                    sh 'sleep 300'
                 }
 
                 
