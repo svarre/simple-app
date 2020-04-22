@@ -6,6 +6,7 @@ pipeline{
           script {
               def git_commit_previos 
               def git_commit_new = "${GIT_COMMIT}"
+            //adding new commit 
           }
         sh 'mvn clean install'
         archive '**/*.war'
