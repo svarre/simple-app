@@ -48,7 +48,8 @@ pipeline{
                 //sh 'cd artifacts'
                 sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output one.zip'
                 sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output two.zip'
-                sh 'ls'         
+                sh 'ls'  
+                sh 'date'       
         }
         post {
             always {
