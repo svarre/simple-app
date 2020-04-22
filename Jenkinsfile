@@ -56,12 +56,12 @@ pipeline{
                 sh 'ls -ltr'  
                 sh 'date'       
         }
-        post {
+       /* post {
             always {
                 // One or more steps need to be included within each condition's block.
                 cleanWs()
             }
-      } 
+      } */
 
     }
   }
