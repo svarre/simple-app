@@ -7,10 +7,10 @@ pipeline{
  }
  parameters {
      choice(name: 'build',
-        choices('no\nyes'),
+        choices: 'no\nyes',
         description: 'perform build')
      choice(name: 'deploy',
-        choices('no\nyes'),
+        choices: 'no\nyes',
         description: 'Only to deploy')
  }
 
