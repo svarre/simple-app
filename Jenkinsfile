@@ -45,8 +45,9 @@ pipeline{
             expression { params.deploy == 'yes'}
         }
         steps {
-                sh 'cd artifacts'
-                sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output babynames.zip'
+                //sh 'cd artifacts'
+                sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output one.zip'
+                sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output two.zip'
                 sh 'ls'
             
             
