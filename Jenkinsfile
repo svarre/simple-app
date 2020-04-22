@@ -59,11 +59,7 @@ pipeline{
                     sh 'date'
                 }
 
-                sh 'mkdir ./us'
-                sh "'echo ${GIT_CURRENT_COMMIT} >> ./us/curr.txt"
-                sh 'mkdir ./uk'
-                sh 'sleep 60'
-
+                
 
                 
                       
