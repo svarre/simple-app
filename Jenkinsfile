@@ -11,7 +11,7 @@ pipeline{
       steps {
 
         sh 'mvn clean install'
-        archive '**/*.war'
+       // archive '**/*.war'
         echo "current commit id is : ${GIT_COMMIT}"
         echo "Previous commit is : ${GIT_PREVIOUS_COMMIT}"
     
