@@ -51,26 +51,28 @@ pipeline{
         }
         steps {
                 //sh 'cd artifacts'
+                sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output three.zip'
                 dir("${env.WORKSPACE}/artifacts"){
                    sh "pwd"
                     sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output one.zip'
                     sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output two.zip'
                     sh 'ls'  
                     sh 'date'
-                    sh 'sleep 300'
                 }
 
-                
+               
+                sh 'sleep 600'
+
 
                 
                       
         }
-        post {
+       /* post {
             always {
                 // One or more steps need to be included within each condition's block.
                 cleanWs()
             }
-}
+}*/
 
     }
   }
