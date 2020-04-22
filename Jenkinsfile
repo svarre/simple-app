@@ -5,18 +5,26 @@ pipeline{
      GIT_CURRENT_COMMIT =  "${GIT_COMMIT}"
      GIT_PREVIOUS_COMMIT = "${GIT_PREVIOUS_COMMIT}"
  }
+ parameters {
+     choice(name: 'build',
+        choices('no\nyes'),
+        description: 'perform build')
+     choice(name: 'deploy',
+        choices('no\nyes'),
+        description: 'Only to deploy')
+ }
 
   stages {
-    stage ('artifact_create') {
+    stage ('Build') {
+      when {
+          expression { params.build == 'yes'}
+      }
       steps {
 
-        sh 'mvn clean install'
-        archive '**/*.war'
+        //sh 'mvn clean install'
+        //archive '**/*.war'
         echo "current commit id is : ${GIT_COMMIT}"
-        echo "Previous commit is : ${GIT_PREVIOUS_COMMIT}"
-        sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output babynames.zip'
-        sh 'ls'
-    
+        echo "Previous commit is : ${GIT_PREVIOUS_COMMIT}"    
       }
       post {
           success {
@@ -31,6 +39,16 @@ pipeline{
               }
           }
       }
+    }
+    stage ('Deploy'){
+        when {
+            expression { params.deploy == 'yes'}
+        }
+        steps {
+            sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output babynames.zip'
+            sh 'ls'
+            
+        }
     }
   }
 }
