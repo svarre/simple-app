@@ -61,7 +61,7 @@ pipeline{
                 }
 
                
-                sh 'sleep 600'
+                sh 'sleep 120'
 
 
                 
