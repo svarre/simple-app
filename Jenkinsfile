@@ -51,11 +51,15 @@ pipeline{
         }
         steps {
                 //sh 'cd artifacts'
-                sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output one.zip'
-                sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output two.zip'
-                sh 'ls -ltr'  
-                sh 'date' 
-                sh 'touch siva.txt'
+                 dir("${env.WORKSPACE}/artifacts"){
+                   sh "pwd"
+                   sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output one.zip'
+                  sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output two.zip'
+                  sh 'ls -ltr'  
+                  sh 'date' 
+                  sh 'touch siva.txt'
+                   sh 'pwd'
+                }
         }
        /* post {
             always {
