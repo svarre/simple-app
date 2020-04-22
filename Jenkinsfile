@@ -20,11 +20,16 @@ pipeline{
           expression { params.build == 'yes'}
       }
       steps {
+          script {
+                string a = "${GIT_CURRENT_COMMIT}"
+                echo "Substring of present commit is : ${a}.substring(0,6)"
+                sh 'mvn clean install'
+                archive '**/*.war'
+                echo "current commit id is : ${GIT_COMMIT}"
+                echo "Previous commit is : ${GIT_PREVIOUS_COMMIT}"  
+                }
 
-        sh 'mvn clean install'
-        archive '**/*.war'
-        echo "current commit id is : ${GIT_COMMIT}"
-        echo "Previous commit is : ${GIT_PREVIOUS_COMMIT}"    
+          
       }
       post {
           success {
