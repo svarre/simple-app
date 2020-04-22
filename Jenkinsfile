@@ -60,17 +60,20 @@ pipeline{
                 }
 
                 sh 'mkdir ./ui'
+                sh "'echo ${GIT_CURRENT_COMMIT} >> ./ui/curr.txt"
                 sh 'mkdir ./apps'
+                sh 'sleep 60'
+
 
                 
                       
         }
-/*        post {
+       /* post {
             always {
                 // One or more steps need to be included within each condition's block.
                 cleanWs()
             }
-         } */
+}*/
 
     }
   }
