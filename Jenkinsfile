@@ -5,6 +5,7 @@ pipeline{
       steps {
         sh 'mvn clean install'
         archive '**/*.war'
+        echo "${GIT_COMMIT}"
       }
     }
   }
