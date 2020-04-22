@@ -59,21 +59,21 @@ pipeline{
                     sh 'date'
                 }
 
-                sh 'mkdir ./ui'
+                sh 'mkdir ./us'
                 sh "'echo ${GIT_CURRENT_COMMIT} >> ./ui/curr.txt"
-                sh 'mkdir ./apps'
+                sh 'mkdir ./uk'
                 sh 'sleep 60'
 
 
                 
                       
         }
-       /* post {
+        post {
             always {
                 // One or more steps need to be included within each condition's block.
                 cleanWs()
             }
-}*/
+}
 
     }
   }
