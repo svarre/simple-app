@@ -1,13 +1,15 @@
 pipeline{
-  agent any 
+  agent any
+
+ environment {
+     GIT_CURRENT_COMMIT =  "${GIT_COMMIT}"
+     GIT_PREVIOUS_COMMIT = "${GIT_PREVIOUS_COMMIT}"
+ }
+
   stages {
     stage ('artifact_create') {
       steps {
-          script {
-              def GIT_CURRENT_COMMIT =  "${GIT_COMMIT}"
-              def GIT_PREVIOUS_COMMIT = "${GIT_PREVIOUS_COMMIT}"
-              
-          }
+
         sh 'mvn clean install'
         archive '**/*.war'
         echo "current commit id is : ${GIT_COMMIT}"
@@ -17,7 +19,7 @@ pipeline{
       post {
           success {
               script {
-                  if (GIT_CURRENT_COMMIT == GIT_PREVIOUS_COMMIT) {
+                  if (env.GIT_CURRENT_COMMIT == env.GIT_PREVIOUS_COMMIT) {
                       echo "skipping uploading to artifact"
                   }
 
