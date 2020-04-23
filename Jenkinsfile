@@ -47,7 +47,7 @@ pipeline{
     }
     stage ('Deploy to stage') {
        when { 
-         branch pattern: "release-\\d+", comparator: "REGEXP"
+         branch pattern: "release/\\d{1,2}\\-d{1,2}\\-\\d{1.2}", comparator: "REGEXP"
          expression { params.deploy == 'yes' }
        }
        steps {
