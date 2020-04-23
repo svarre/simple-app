@@ -26,10 +26,10 @@ pipeline{
                 sh 'mvn clean install'
                 archive '**/*.war'
                 echo "current commit id is : ${GIT_COMMIT}"
-                echo "Previous commit is : ${GIT_PREVIOUS_COMMIT}"  
+                echo "Previous commit is : ${GIT_PREVIOUS_COMMIT}"
                 }
 
-          
+
       }
       post {
           success {
@@ -45,35 +45,16 @@ pipeline{
           }
       }
     }
-    stage ('Deploy'){
-        when {
-            expression { params.deploy == 'yes'}
-        }
-        steps {
-                //sh 'cd artifacts'
-                sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output three.zip'
-                dir("${env.WORKSPACE}/artifacts"){
-                   sh "pwd"
-                    sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output one.zip'
-                    sh 'curl http://stash.compciv.org/ssa_baby_names/names.zip --output two.zip'
-                    sh 'ls'  
-                    sh 'date'
-                }
-
-               
-                sh 'sleep 120'
-
-
-                
-                      
-        }
-       /* post {
-            always {
-                // One or more steps need to be included within each condition's block.
-                cleanWs()
-            }
-}*/
-
+    stage ('Deploy to stage') {
+       when { 
+         branch pattern: "release-\\d+", comparator: "REGEXP"
+         expression { params.deploy == 'yes' }
+       }
+       steps {
+         echo "Executing branch in stage"
+       }
+       
     }
+
   }
 }
